@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.clauber.dto.CourseDTO;
 import com.clauber.dto.mapper.CourseMapper;
+import com.clauber.enums.Category;
 import com.clauber.exception.RecordNotFoundException;
 import com.clauber.repository.CourseRepository;
 
@@ -48,7 +49,7 @@ public class CourseService {
 	public CourseDTO update(@NotNull @Positive Long id, @Valid @NotNull CourseDTO course) {
 		return courseRepository.findById(id).map(recordFound -> {
 			recordFound.setName(course.name());
-			recordFound.setCategory(course.category());
+			recordFound.setCategory(Category.FRONT_END);
 			return courseRepository.save(recordFound);
 		}).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFoundException(id));
 	}
