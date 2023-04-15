@@ -2,28 +2,29 @@ package com.clauber.enums.converters;
 
 import java.util.stream.Stream;
 
-import com.clauber.enums.Category;
+import com.clauber.enums.Status;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
+
 @Converter(autoApply = true)
-public class CategoryConverter implements AttributeConverter<Category, String> {
+public class StatusConverter implements AttributeConverter<Status, String> {
 
     @Override
-    public String convertToDatabaseColumn(Category category) {
-        if (category == null) {
+    public String convertToDatabaseColumn(Status status) {
+        if (status == null) {
             return null;
         }
-        return category.getValue();
+        return status.getValue();
     }
 
     @Override
-    public Category convertToEntityAttribute(String value) {
+    public Status convertToEntityAttribute(String value) {
         if (value == null) {
             return null;
         }
-        return Stream.of(Category.values())
+        return Stream.of(Status.values())
                 .filter(c -> c.getValue().equals(value))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);

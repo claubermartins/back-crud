@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.clauber.enums.Category;
+import com.clauber.enums.Status;
 import com.clauber.model.Course;
 import com.clauber.repository.CourseRepository;
 
@@ -24,7 +25,7 @@ public class BackCrudApplication {
 			Course c = new Course();
 			c.setName("Angular com Spring");   
 			c.setCategory(Category.FRONT_END);
-			
+			c.setStatus(Status.ACTIVE);
 			courseRepository.save(c);
 		};
 	}

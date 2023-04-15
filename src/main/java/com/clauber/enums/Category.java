@@ -1,20 +1,15 @@
 package com.clauber.enums;
 
 public enum Category {
-	BACK_END("Back-end"), FRONT_END("Front-end");
-	
-	private String value;
-	
-	private Category(String value) {
-		this.value = value;
-	}
+    FRONT_END("Front-end"), BACK_END("Back-end");
 
-	public String getValue() {
-		return value;
-	}
-	
-	@Override
-	public String toString() {
-		return value;
-	}
+    private String value;
+
+    private Category(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }
