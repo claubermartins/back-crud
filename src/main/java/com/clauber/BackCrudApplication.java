@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import com.clauber.enums.Category;
 import com.clauber.enums.Status;
 import com.clauber.model.Course;
+import com.clauber.model.Lesson;
 import com.clauber.repository.CourseRepository;
 
 @SpringBootApplication
@@ -26,6 +27,13 @@ public class BackCrudApplication {
 			c.setName("Angular com Spring");   
 			c.setCategory(Category.FRONT_END);
 			c.setStatus(Status.ACTIVE);
+			
+			Lesson l = new Lesson();
+			l.setName("Introdução");
+			l.setYoutubeUrl("siteAula");
+			l.setCourse(c);
+			c.getLessons().add(l);
+			
 			courseRepository.save(c);
 		};
 	}
