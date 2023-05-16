@@ -34,6 +34,12 @@ public class BackCrudApplication {
 			l.setCourse(c);
 			c.getLessons().add(l);
 			
+			Lesson l1 = new Lesson();
+			l1.setName("Angular");
+			l1.setYoutubeUrl("siteAula2");
+			l1.setCourse(c);
+			c.getLessons().add(l1);
+			
 			courseRepository.save(c);
 		};
 	}
