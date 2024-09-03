@@ -3,6 +3,7 @@ package com.clauber.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.clauber.model.Course;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -44,12 +45,16 @@ public class CourseService {
 		return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(course)));
 	}
 
-	public CourseDTO update(@NotNull @Positive Long id, @Valid @NotNull CourseDTO course) {
+	public CourseDTO update(@NotNull @Positive Long id, @Valid @NotNull CourseDTO courseDTO) {
 		return courseRepository.findById(id).map(recordFound -> {
-			recordFound.setName(course.name());
-			recordFound.setCategory(courseMapper.convertCategoryValue(course.category()));
-			return courseRepository.save(recordFound);
-		}).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFoundException(id));
+			Course course = courseMapper.toEntity(courseDTO);
+			recordFound.setName(courseDTO.name());
+			recordFound.setCategory(courseMapper.convertCategoryValue(courseDTO.category()));
+			//recordFound.setLessons(course.getLessons());
+			recordFound.getLessons().clear();
+			course.getLessons().forEach(recordFound.getLessons()::add);
+			return courseMapper.toDTO(courseRepository.save(recordFound));
+		}).orElseThrow(() -> new RecordNotFoundException(id));
 	}
 
 	public void delete(@NotNull @Positive Long id) {
