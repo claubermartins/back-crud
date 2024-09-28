@@ -22,25 +22,28 @@ public class BackCrudApplication {
 	CommandLineRunner initDatabase(CourseRepository courseRepository) {
 		return args -> {
 			courseRepository.deleteAll();
-			
-			Course c = new Course();
-			c.setName("Angular com Spring");   
-			c.setCategory(Category.BACK_END);
-			c.setStatus(Status.ACTIVE);
-			
-			Lesson l = new Lesson();
-			l.setName("Introdução");
-			l.setYoutubeUrl("01234567890");
-			l.setCourse(c);
-			c.getLessons().add(l);
-			
-			Lesson l1 = new Lesson();
-			l1.setName("Angular");
-			l1.setYoutubeUrl("01234567891");
-			l1.setCourse(c);
-			c.getLessons().add(l1);
-			
-			courseRepository.save(c);
+
+			for(int i = 0; i < 20; i++) {
+
+				Course c = new Course();
+				c.setName("Angular com Spring" + i);
+				c.setCategory(Category.BACK_END);
+				c.setStatus(Status.ACTIVE);
+
+				Lesson l = new Lesson();
+				l.setName("Introdução");
+				l.setYoutubeUrl("01234567890");
+				l.setCourse(c);
+				c.getLessons().add(l);
+
+				Lesson l1 = new Lesson();
+				l1.setName("Angular");
+				l1.setYoutubeUrl("01234567891");
+				l1.setCourse(c);
+				c.getLessons().add(l1);
+
+				courseRepository.save(c);
+			}
 		};
 	}
 }
