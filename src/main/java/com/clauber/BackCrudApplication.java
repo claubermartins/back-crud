@@ -10,6 +10,7 @@ import com.clauber.enums.Status;
 import com.clauber.model.Course;
 import com.clauber.model.Lesson;
 import com.clauber.repository.CourseRepository;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class BackCrudApplication {
@@ -19,6 +20,7 @@ public class BackCrudApplication {
 	}
 	
 	@Bean
+	@Profile("dev")
 	CommandLineRunner initDatabase(CourseRepository courseRepository) {
 		return args -> {
 			courseRepository.deleteAll();
